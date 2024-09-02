@@ -1,0 +1,32 @@
+function topKFrequentWords(words, k):
+    # Step 1: Initialize a Frequency Map
+    frequency_map = new HashMap<String, Integer>()
+
+    # Step 2: Populate Frequency Map
+    for each word in words:
+        if frequency_map contains word:
+            frequency_map[word] = frequency_map[word] + 1
+        else:
+            frequency_map[word] = 1
+
+    # Step 3: Create a List from the Frequency Map
+    frequency_list = new ArrayList<Map.Entry<String, Integer>>()
+    for each entry in frequency_map:
+        frequency_list.add(entry)
+
+    # Step 4: Sort the List
+    # Sort by frequency in descending order, then lexicographically in ascending order
+    frequency_list.sort((entry1, entry2) -> {
+        if (entry1.value != entry2.value):
+            return entry2.value - entry1.value  # Descending order of frequency
+        else:
+            return entry1.key.compareTo(entry2.key)  # Lexicographical order
+    })
+
+    # Step 5: Select the Top K Words
+    result = new ArrayList<String>()
+    for i from 0 to k-1:
+        result.add(frequency_list[i].key)
+
+    # Step 6: Return the Result
+    return result
